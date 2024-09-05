@@ -1,6 +1,6 @@
 # Welcome to my project
 
-This website made for an RPG style game, where you gain experience doing chores.
+This website made for an RPG style game, where you gain experience doing chores. You can create, read, update and delete tasks to customise to your own liking.
 
 ## Languages and Libraries
 
