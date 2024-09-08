@@ -3,7 +3,7 @@ import React, { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface RegisterData {
-    name: string;
+    username: string;
     password: string;
     passwordAgain: string;
 }
@@ -11,7 +11,7 @@ interface RegisterData {
 const Register: React.FC = () => {
     const [error, setError] = useState<string>();
     const [data, setData] = useState<RegisterData>({
-        name: "",
+        username: "",
         password: "",
         passwordAgain: "",
     });
@@ -37,6 +37,8 @@ const Register: React.FC = () => {
         //navigáljunk a főoldalra majd frissítsük az oldalt
     };
 
+    console.log(data);
+
     return (
         <main className="flex w-full items-start">
             <form
@@ -55,11 +57,11 @@ const Register: React.FC = () => {
                             className="border rounded-md"
                             type="text"
                             name="name"
-                            value={data.name}
+                            value={data.username}
                             onChange={(e) =>
                                 setData((prev) => ({
                                     ...prev!,
-                                    name: e.target.value,
+                                    username: e.target.value,
                                 }))
                             }
                         />

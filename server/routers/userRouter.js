@@ -8,6 +8,8 @@ router.post("/register", async (req, res) => {
     try {
         const { username, password, passwordAgain } = req.body;
 
+        console.log(username, password, passwordAgain);
+
         // Validating user data
         if (!username || !password || !passwordAgain) {
             return res.status(400).json({ Error: "Fill all required fields!" });
