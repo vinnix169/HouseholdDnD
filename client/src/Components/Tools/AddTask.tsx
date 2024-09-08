@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 
 interface Task {
     title: string;
@@ -31,7 +31,7 @@ const AddTask: React.FC = () => {
         setTask((prev) => ({ ...prev, tutorials: updateTutorial }));
     };
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleSubmit = async () => {
         //direkt nincs preventDefault
         await axios
             .post("http://localhost:8000/task/new", task)
@@ -55,7 +55,7 @@ const AddTask: React.FC = () => {
                     <h1 className="p-2 mb-5 text-4xl font-bold">
                         Add to your adventure!
                     </h1>
-                    <div className="w-96 p-2">
+                    <div className="w-full p-2">
                         <div className="flex flex-col mb-4">
                             <label htmlFor="title" className="mb-1">
                                 Title:
@@ -169,7 +169,7 @@ const AddTask: React.FC = () => {
                 </form>
             </div>
             <div
-                className="w-full bg-violet-200 h-48 bg-cover bg-center"
+                className=" w-full bg-violet-200 h-48 bg-cover bg-center"
                 style={{
                     backgroundImage: `url("./src/img/scenery4.jpg")`,
                 }}

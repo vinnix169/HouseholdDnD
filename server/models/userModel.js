@@ -25,6 +25,64 @@ const userSchema = new mongoose.Schema({
         type: Array,
         required: true,
     },
+    comrades: {
+        type: Array,
+        required: false,
+    },
+    description: {
+        type: String,
+        required: false,
+    },
+    clan: {
+        type: String,
+        required: false,
+    },
+    equipment: {
+        leftHand: {
+            type: Object,
+            required: false,
+        },
+        rightHand: {
+            type: Object,
+            required: false,
+        },
+        head: {
+            type: Object,
+            required: false,
+        },
+        body: {
+            type: Object,
+            required: false,
+        },
+        legs: {
+            type: Object,
+            required: false,
+        },
+        feet: {
+            type: Object,
+            required: false,
+        },
+    },
+    pendingComrade: {
+        userId: {
+            type: String,
+            required: false,
+        },
+        accepted: {
+            type: Boolean,
+            required: false,
+        },
+    },
+    pendingClan: {
+        clanId: {
+            type: String,
+            required: false,
+        },
+        accepted: {
+            type: Boolean,
+            required: false,
+        },
+    },
 });
 
 const User = mongoose.model("user", userSchema);

@@ -9,7 +9,7 @@ const ManageTask: React.FC<TaskProp> = ({ tasks }) => {
     //A beérkezett adatot megjelenítjük
     return (
         <main className=" flex flex-col w-full items-start p-10 animate-fadeInFast">
-            <h1 className="border-l-4 pl-2 py-2 font-bold text-5xl mb-5">
+            <h1 className="border-l-4 pl-2 py-2 font-bold text-5xl my-10">
                 Recreation of Tasks
             </h1>
             <div className="flex-col">

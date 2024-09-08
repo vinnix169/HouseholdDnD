@@ -3,7 +3,7 @@ export interface Task {
     title: string;
     exp: number;
     description: string;
-    tutorials: [];
+    tutorial: [];
 }
 
 export interface User {
@@ -13,6 +13,12 @@ export interface User {
     exp: number;
     lvl: number;
     taskToday: number[];
+    comrades: string[]
+    pendingComrade: [{
+        userId: string,
+        accepted: boolean
+    }]
+    description: string
 }
 
 export interface LoginData {

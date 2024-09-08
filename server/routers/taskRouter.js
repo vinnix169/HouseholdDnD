@@ -49,9 +49,6 @@ router.post("/taskByIds", async (req, res) => {
             return res.status(400).send("Cannot find task with this ID");
         }
 
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        console.log(ids);
-
         const tasks = await Task.find({ _id: { $in: ids } });
         const taskMap = new Map();
         tasks.forEach((task) => taskMap.set(task._id.toString(), task));

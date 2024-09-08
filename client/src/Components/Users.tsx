@@ -29,7 +29,11 @@ const Users: React.FC<UsersProp> = ({ data: userData }) => {
                 style={{ width: "70%", minWidth: "480px" }}
             >
                 {userData?.map((i: User, index: number) => (
-                    <Link key={index} className="hover:bg-gray-200" to="/">
+                    <Link
+                        key={index}
+                        className="hover:bg-gray-200"
+                        to={"/profile/" + i._id}
+                    >
                         <div className="border-b w-full"></div>
                         <div className=" h-12 my-2 flex justify-evenly items-center">
                             <div className="flex w-1/2 mr-4 justify-start items-center">
@@ -39,9 +43,7 @@ const Users: React.FC<UsersProp> = ({ data: userData }) => {
                                         style={{
                                             width: "50px",
                                             height: "50px",
-                                            //backgroundImage: `url("/src/img/pfps/${i.pfp}")`,
-                                            backgroundImage:
-                                                'url("./src/img/pfps/pfp3.jpg")',
+                                            backgroundImage: `url("/src/img/pfps/${i.avatar}")`,
                                         }}
                                     ></div>
                                 </div>

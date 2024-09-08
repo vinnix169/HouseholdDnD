@@ -3,6 +3,22 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
+router.get("/profile/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const result = await User.findById(id);
+
+        if (result) {
+            return res.status(200).send(result);
+        }
+        return res.status(404).send({ message: "User not found" }); // Fixed the error response
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: "Internal Server Error" }); // Added proper error handling
+    }
+});
+
 // Register user
 router.post("/register", async (req, res) => {
     try {
@@ -152,7 +168,11 @@ router.get("/loggedInUser", async (req, res) => {
             exp: currentUser.exp,
             lvl: currentUser.lvl,
             taskToday: currentUser.taskToday,
-            avatar: "default",
+            avatar: currentUser.avatar,
+            comrades: currentUser.comrades,
+            clan: currentUser.clan,
+            pendingComrade: currentUser.pendingComrade,
+            pendingClan: currentUser.pendingClan,
         };
 
         res.status(200).json(UserDTO);
@@ -238,63 +258,111 @@ router.put("/lvlUp/:id", async (req, res) => {
     }
 });
 
-router.put("/updateUser", async (req, res) => {
-    try {
-        const { username, password, avatar, _id } = req.body;
-        const currentUser = await User.findById(_id);
+router.post("/sendFriendRequest/:id", async (req, res) => {
+    const { id } = req.params;
+    const { sender } = req.body;
 
-        let updatedUser = currentUser._doc;
+    if (!id || !sender) {
+        return res.status(400).send({ message: "IDs are not provided!" });
+    }
 
-        if (username) {
-            updatedUser = {
-                ...updatedUser,
-                username,
-            };
-        }
+    const alreadySent = await User.findOne({
+        _id: id,
+        pendingComrade: { userId: sender, accepted: false },
+    });
 
-        if (password) {
-            const comparePassword = await bcrypt.compare(
-                password,
-                currentUser.passwordHash
-            );
+    if (alreadySent) {
+        return res
+            .status(400)
+            .send({ message: "This user was already sent a request!" });
+    }
 
-            if (!comparePassword) {
-                const salt = await bcrypt.genSalt();
-                const passwordHash = await bcrypt.hash(password, salt);
-
-                updatedUser = {
-                    ...updatedUser,
-                    passwordHash,
-                };
-            }
-        }
-
-        if (avatar) {
-            updatedUser = {
-                ...updatedUser,
-                avatar,
-            };
-        }
-
-        await User.findByIdAndUpdate(_id, updatedUser, { new: true });
-
-        // Új JWT generálása a frissített adatokkal
-        const token = jwt.sign(
-            {
-                id: updatedUser._id,
-                username: updatedUser.username,
-                avatar: updatedUser.avatar,
+    const result = await User.findByIdAndUpdate(
+        id,
+        {
+            $push: {
+                pendingComrade: { userId: sender, accepted: false },
             },
-            process.env.JWT_SECRET,
-            { expiresIn: "1h" } // A token lejárati ideje
+        },
+        { new: true }
+    );
+
+    const sendToSender = await User.findByIdAndUpdate(
+        sender,
+        {
+            $push: {
+                pendingComrade: { userId: id, accepted: true },
+            },
+        },
+        { new: true }
+    );
+
+    return res.status(200).send({ message: "Friend Request Sent" });
+});
+
+router.put("/updateUsername", async (req, res) => {
+    try {
+        const { _id, username } = req.body;
+
+        console.log(_id, username);
+
+        // Ensure that both _id and username are provided
+        if (!_id || !username) {
+            return res
+                .status(400)
+                .send({ message: "ID and username are required." });
+        }
+
+        // Update the user's username
+        const result = await User.findByIdAndUpdate(
+            _id,
+            { $set: { username: username } }, // Use $set to update the username field
+            { new: true } // Return the updated document
         );
 
-        console.log(updatedUser);
+        console.log(result);
 
-        res.json({ oldUser: currentUser, newData: updatedUser, token });
+        if (result) {
+            return res.status(200).send(result); // Successfully updated
+        } else {
+            return res.status(404).send({ message: "User not found" }); // User not found
+        }
     } catch (error) {
-        console.log(error);
-        res.status(500).send("Internal Server Error");
+        console.error(error);
+        return res.status(500).send({ message: "Internal Server Error" });
+    }
+});
+
+router.put("/updateAvatar", async (req, res) => {
+    try {
+        const { _id, avatar } = req.body;
+
+        console.log(_id, avatar);
+
+        // Ensure that both _id and username are provided
+        if (!_id || !avatar) {
+            return res
+                .status(400)
+                .send({ message: "ID and avatar are required." });
+        }
+
+        // Update the user's username
+        const result = await User.findByIdAndUpdate(
+            _id,
+            { $set: { avatar: avatar } }, // Use $set to update the username field
+            { new: true } // Return the updated document
+        );
+
+        console.log(result);
+
+        if (result) {
+            return res.status(200).send(result); // Successfully updated
+        } else {
+            return res.status(404).send({ message: "User not found" }); // User not found
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: "Internal Server Error" });
     }
 });
 

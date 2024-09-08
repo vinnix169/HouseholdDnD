@@ -21,7 +21,7 @@ const Sidebar: React.FC = () => {
     };
 
     return (
-        <aside className="self-start h-screen sticky top-0 col-span-1 xl:col-span-2 border-r">
+        <aside className="self-start h-screen sticky top-0 col-span-1 xl:col-span-2 border-r shadow-lg">
             <div className="w-full flex flex-col justify-center items-center">
                 <div
                     className="w-40 h-28 grid place-items-center text-center"
@@ -39,13 +39,15 @@ const Sidebar: React.FC = () => {
                 </div>
             </div>
 
-            <h2 className="pl-2 text-2xl font-semibold mb-10">Welcome!</h2>
+            <h2 className="py-4 text-2xl text-center font-semibold mb-10">
+                Welcome!
+            </h2>
 
             {loggedIn && (
                 <>
                     <Link reloadDocument to="/">
                         <h3
-                            className={`text-center text-lg mb-10 hover:bg-gray-200 transition${
+                            className={`text-center text-lg  hover:bg-gray-200 transition${
                                 location.pathname === "/"
                                     ? "font-bold text-gray-800"
                                     : ""
@@ -57,7 +59,7 @@ const Sidebar: React.FC = () => {
 
                     <Link reloadDocument to="/taskComplete">
                         <h3
-                            className={`text-center text-lg mb-10 hover:bg-gray-200 transition ${
+                            className={`text-center text-lg  hover:bg-gray-200 transition ${
                                 location.pathname === "/taskComplete"
                                     ? "font-bold"
                                     : ""
@@ -67,12 +69,12 @@ const Sidebar: React.FC = () => {
                         </h3>
                     </Link>
 
-                    <div>
-                        <h3 className="pl-2 text-lg mb-3">Tools</h3>
-                        <ul className="mb-10">
+                    <div className="">
+                        <ul className="px-4 py-10">
+                            <h3 className="text-lg">Tools</h3>
                             <Link to="/addTask">
                                 <li
-                                    className={`px-3 text-gray-400 border-b hover:bg-gray-200 hover:text-gray-600 transition ${
+                                    className={` text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition ${
                                         location.pathname === "/addTask"
                                             ? "font-bold text-gray-600"
                                             : ""
@@ -83,7 +85,7 @@ const Sidebar: React.FC = () => {
                             </Link>
                             <Link to="/manageTask">
                                 <li
-                                    className={`px-3 text-gray-400 border-b hover:bg-gray-200 hover:text-gray-600 transition${
+                                    className={` text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition${
                                         location.pathname === "/manageTask"
                                             ? "font-bold text-gray-600"
                                             : ""
@@ -94,7 +96,7 @@ const Sidebar: React.FC = () => {
                             </Link>
                             <Link reloadDocument to="/profile">
                                 <li
-                                    className={`px-3  text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition ${
+                                    className={` text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition ${
                                         location.pathname === "/profile"
                                             ? "font-bold text-gray-600"
                                             : ""
@@ -104,11 +106,12 @@ const Sidebar: React.FC = () => {
                                 </li>
                             </Link>
                         </ul>
-                        <h3 className="pl-2 text-lg mb-3">Documents</h3>
-                        <ul className="mb-10">
+
+                        <ul className="px-4 py-10">
+                            <h3 className="text-lg">Documents</h3>
                             <Link to="/allTask">
                                 <li
-                                    className={`px-3 border-b text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition ${
+                                    className={` text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition ${
                                         location.pathname === "/allTask"
                                             ? "font-bold text-gray-600"
                                             : ""
@@ -119,7 +122,7 @@ const Sidebar: React.FC = () => {
                             </Link>
                             <Link to="/calculation">
                                 <li
-                                    className={`px-3 border-b text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition ${
+                                    className={` text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition ${
                                         location.pathname === "/calculation"
                                             ? "font-bold text-gray-600"
                                             : ""
@@ -130,7 +133,7 @@ const Sidebar: React.FC = () => {
                             </Link>
                             <Link to="/tutorial">
                                 <li
-                                    className={`px-3 border-b text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition${
+                                    className={` text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition${
                                         location.pathname === "/tutorial"
                                             ? "font-bold text-gray-600"
                                             : ""
@@ -141,7 +144,7 @@ const Sidebar: React.FC = () => {
                             </Link>
                             <Link reloadDocument to="/users">
                                 <li
-                                    className={`px-3 border-b text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition ${
+                                    className={` text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition ${
                                         location.pathname === "/users"
                                             ? "font-bold text-gray-600"
                                             : ""
@@ -152,7 +155,7 @@ const Sidebar: React.FC = () => {
                             </Link>
                         </ul>
                         <div
-                            className="px-3 text-center text-gray-600 hover:bg-gray-200 hover:text-gray-600 cursor-pointer transition"
+                            className=" text-center text-gray-600 hover:bg-gray-200 hover:text-gray-600 cursor-pointer transition"
                             onClick={handleLogout}
                         >
                             Logout

@@ -45,7 +45,7 @@ const TaskTutorialPage = () => {
                                 Loading videos...
                             </h3>
                         )}
-                        {task.tutorials.map((i, index) => (
+                        {task?.tutorial?.map((i, index) => (
                             <iframe
                                 key={index}
                                 className="mx-2 my-10 rounded-xl border"

@@ -124,14 +124,7 @@ const TaskComplete: React.FC<TaskCompleteProps> = ({ userData, taskData }) => {
         <main className="flex flex-col w-full items-start animate-fadeInFast">
             {userData && <HUD exp={renderExp} />}
             <div className="flex w-full justify-center ">
-                <div
-                    className="w-1/4 mr-5 h-screen bg-cover bg-center "
-                    style={{
-                        backgroundImage: `url("./src/img/aesth1.jpg")`,
-                    }}
-                ></div>
-
-                <div className="w-2/4 flex flex-col items-center p-2">
+                <div className="w-2/3 flex flex-col items-center p-2">
                     <h3 className="font-bold w-full text-center">
                         Search for a task:
                     </h3>
@@ -203,7 +196,7 @@ const TaskComplete: React.FC<TaskCompleteProps> = ({ userData, taskData }) => {
                 </div>
 
                 <div
-                    className="w-1/4 ml-5 h-screen bg-cover bg-center "
+                    className="w-1/3 ml-5 h-screen bg-cover bg-center xl:hidden"
                     style={{
                         backgroundImage: `url("./src/img/meditation.jpg")`,
                     }}

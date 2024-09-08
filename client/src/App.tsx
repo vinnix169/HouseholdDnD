@@ -1,5 +1,5 @@
 //import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import AllTask from "./Components/Documentation/AllTask";
 import MainPage from "./Pages/MainPage";
 import Calculation from "./Components/Documentation/Calculation";
@@ -21,7 +21,9 @@ import TaskDetail from "./Components/Tools/TaskDetail";
 import { Task, User } from "./Components/types";
 import Footer from "./Components/Footer";
 import AsideDetector from "./Components/AsideDetector";
-//import AvatarSelector from "./Components/AvatarSelector";
+import PlayerProfile from "./Components/Tools/PlayerProfile";
+
+import Notification from "./Components/Notification/Notification";
 
 axios.defaults.withCredentials = true;
 
@@ -38,30 +40,30 @@ export default function App() {
     const { data: allUserData } = useGet<User[]>("http://localhost:8000/user/");
 
     const { error: serverError } = useGet("http://localhost:8000/");
-    console.log(userData);
+
     return (
         <Router>
             {!serverError && (
                 <>
-                    <div className="grid grid-cols-7 xl:grid-cols-8 min-h-screen h-full text-gray-800">
-                        {/*userData?.avatar === "default" && (
-                            <AvatarSelector _id={userData._id} />
-                        )*/}
+                    <div className="grid grid-cols-6 xl:grid-cols-8 min-h-screen h-full text-gray-800">
                         {/*MAKE IT A COMPONENT LATER!!! */}
                         {userData && loggedIn && (
-                            <a
-                                href="/profile"
-                                className="profile fixed right-0 m-5 w-14 h-14 rounded-md shadow-lg cursor-pointer"
-                                style={{
-                                    backgroundImage: `url("./src/img/pfps/${userData.avatar}")`,
-                                }}
-                            ></a>
+                            <>
+                                <Link
+                                    reloadDocument
+                                    to="/profile"
+                                    className="profile fixed right-4 top-4 w-14 h-14 rounded-md shadow-lg cursor-pointer"
+                                    style={{
+                                        backgroundImage: `url("./src/img/pfps/${userData.avatar}")`,
+                                    }}
+                                ></Link>
+                                <Notification />
+                            </>
                         )}
                         {/*MAKE IT A COMPONENT LATER!!! */}
                         <AsideDetector />
-
                         {taskData && loggedIn && userData && allUserData && (
-                            <div className="col-span-6 w-full">
+                            <div className="col-span-5 xl:col-span-8 w-full">
                                 <Routes>
                                     <Route path="/" element={<MainPage />} />
                                     <Route
@@ -90,6 +92,18 @@ export default function App() {
                                     <Route
                                         path="/profile"
                                         element={<Profile user={userData} />}
+                                    />
+                                    <Route
+                                        path="/profile/:id"
+                                        element={
+                                            <PlayerProfile
+                                                comrades={userData.comrades}
+                                                _id={userData._id}
+                                                pendingComrade={
+                                                    userData.pendingComrade
+                                                }
+                                            />
+                                        }
                                     />
                                     <Route
                                         path="/taskComplete"

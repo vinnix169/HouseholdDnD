@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
+import { FaCircleXmark } from "react-icons/fa6";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoMenu } from "react-icons/io5";
 
 const AsideDetector = () => {
     const [isMobile, setIsMobile] = useState<boolean>(
@@ -25,16 +28,19 @@ const AsideDetector = () => {
     };
 
     return (
-        <div>
+        <>
             {isMobile && (
-                <div>
+                <>
                     <div
-                        className="fixed w-14 h-14  cursor-pointer bg-cover bg-center border m-2 rounded-lg hover:bg-gray-300"
-                        style={{
-                            backgroundImage: "url('/src/img/hamburger.webp')",
-                        }}
+                        className={`fixed flex items-center justify-center w-14 h-14 bg-gray-100 cursor-pointer m-2 rounded-lg text-5xl hover:bg-gray-300 shadow-md ${
+                            !isHidden
+                                ? "translate-x-72 rotate-90"
+                                : "translate-x-0"
+                        } transition-all`}
                         onClick={toggleSidebar} // toggleSidebar hívása
-                    ></div>
+                    >
+                        <IoMenu />
+                    </div>
                     <div
                         className={`w-72 fixed z-20 bg-gray-100 transition-transform ${
                             isHidden
@@ -43,22 +49,11 @@ const AsideDetector = () => {
                         }`}
                     >
                         <Sidebar />
-                        <div
-                            className="w-8 h-8 absolute font-bold top-2 left-full -translate-x-10 bg-cover bg-center cursor-pointer rounded-full hover:bg-gray-300"
-                            style={{
-                                backgroundImage: "url('/src/img/x.png')",
-                            }}
-                            onClick={toggleSidebar} // toggleSidebar hívása
-                        ></div>
                     </div>
-                </div>
+                </>
             )}
-            {!isMobile && (
-                <div>
-                    <Sidebar />
-                </div>
-            )}
-        </div>
+            {!isMobile && <Sidebar />}
+        </>
     );
 };
 

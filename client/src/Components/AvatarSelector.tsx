@@ -1,24 +1,21 @@
 import React from "react";
 import pfps from "../img/pfps/pfps.json";
 import axios from "axios";
-import { User } from "./types";
 
-const AvatarSelector: React.FC<User> = ({ _id }) => {
+interface Props {
+    _id: string;
+}
+
+const AvatarSelector: React.FC<Props> = ({ _id }) => {
     const handleSelected = async (avatar: string) => {
         const updateData = { avatar, _id };
         await axios
-            .put("http://localhost:8000/user/updateUser", updateData)
-            .then((res) => {
-                const { token } = res.data;
-                if (token) {
-                    localStorage.setItem("token", token);
-                    window.location.reload();
-                }
-            })
+            .put("http://localhost:8000/user/updateAvatar", updateData)
+            .then(() => window.location.reload())
             .catch((err) => console.error(err));
     };
     return (
-        <div className="absolute w-screen h-screen bg-gray-800/50 z-30 flex justify-center items-center transition-all">
+        <div className="absolute left-0 top-0 w-full h-full bg-gray-800/50 z-30 flex justify-center items-center transition-all">
             <div className="w-96 h-96 bg-gray-100 rounded-2xl">
                 <h1 className="w-full text-center py-5 text-2xl font-bold">
                     Choose your avatar!
