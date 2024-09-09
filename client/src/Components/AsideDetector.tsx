@@ -32,11 +32,11 @@ const AsideDetector = () => {
             {isMobile && (
                 <>
                     <div
-                        className={`fixed flex items-center justify-center w-14 h-14 bg-gray-100 cursor-pointer m-2 rounded-lg text-5xl hover:bg-gray-300 shadow-md ${
+                        className={`fixed flex z-10 items-center justify-center w-14 h-14 bg-gray-100 cursor-pointer m-2 rounded-lg text-5xl hover:bg-gray-300 shadow-md ${
                             !isHidden
                                 ? "translate-x-72 rotate-90"
                                 : "translate-x-0"
-                        } transition-all`}
+                        } transition-all ease-out duration-200`}
                         onClick={toggleSidebar} // toggleSidebar hívása
                     >
                         <IoMenu />

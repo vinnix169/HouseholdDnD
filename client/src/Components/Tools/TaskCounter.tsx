@@ -124,12 +124,12 @@ const TaskComplete: React.FC<TaskCompleteProps> = ({ userData, taskData }) => {
         <main className="flex flex-col w-full items-start animate-fadeInFast">
             {userData && <HUD exp={renderExp} />}
             <div className="flex w-full justify-center ">
-                <div className="w-2/3 flex flex-col items-center p-2">
-                    <h3 className="font-bold w-full text-center">
+                <div className="w-3/4 flex flex-col items-center p-2">
+                    <h3 className="font-bold mt-20 w-full text-center">
                         Search for a task:
                     </h3>
                     <input
-                        className="w-52 py-1 px-2 rounded-lg border "
+                        className="w-64 py-1 px-2 rounded-lg border "
                         type="search"
                         name="search"
                         id="search"
@@ -151,8 +151,7 @@ const TaskComplete: React.FC<TaskCompleteProps> = ({ userData, taskData }) => {
                                 </div>
                             ))}
                     </div>
-
-                    <div className="mt-5 w-full">
+                    <div className="mt-5 w-3/4 md:w-full">
                         <div className="bg-white p-2 rounded-xl">
                             {Array.isArray(currentTasks) &&
                                 currentTasks.length > 0 && // Ellenőrizzük, hogy currentTasks valóban egy tömb-e
@@ -196,7 +195,7 @@ const TaskComplete: React.FC<TaskCompleteProps> = ({ userData, taskData }) => {
                 </div>
 
                 <div
-                    className="w-1/3 ml-5 h-screen bg-cover bg-center xl:hidden"
+                    className="w-1/4 ml-5 h-screen bg-cover bg-center xl:hidden"
                     style={{
                         backgroundImage: `url("./src/img/meditation.jpg")`,
                     }}

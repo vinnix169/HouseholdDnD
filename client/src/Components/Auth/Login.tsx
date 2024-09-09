@@ -23,20 +23,24 @@ const Login: React.FC = () => {
                     navigate("/");
                     window.location.reload();
                 })
-                .catch((err) => console.error(err));
-        } else {
-            setLoginError("Fill all fields!"); //különben hiba jelzése
+                .catch((err) => {
+                    console.error(err);
+                    setLoginError(err.response.data.Error);
+                });
         }
     };
 
     return (
-        <main className="flex w-full items-start">
-            <form className="flex flex-col m-10 w-1/3" onSubmit={handleLogin}>
+        <main className="flex w-full items-start xl:justify-center xl:items-center">
+            <form
+                className="flex flex-col m-10 w-1/2 xl:w-2/3 xl:justify-center xl:items-center"
+                onSubmit={handleLogin}
+            >
                 <h1 className="border-l-2 p-2 mb-5 text-4xl font-bold">
                     Continue your adventure!
                 </h1>
                 {getLoggedIn() && (
-                    <div className="w-52 border-l-2 p-2">
+                    <div className="w-1/2 sm:w-full border-l-2 p-2">
                         <div className="flex flex-col mb-4">
                             <label htmlFor="name" className="mb-1">
                                 Name:
@@ -82,7 +86,7 @@ const Login: React.FC = () => {
                 )}
             </form>
             <div
-                className="w-2/3 h-screen bg-cover bg-center"
+                className="w-2/3 h-screen xl:hidden bg-cover bg-center"
                 style={{
                     backgroundImage: `url("./src/img/login-wallpaper-6.1.jpg")`,
                 }}

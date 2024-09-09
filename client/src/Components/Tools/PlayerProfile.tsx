@@ -4,7 +4,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import useGet from "../../Hooks/useGet";
 import axios from "axios";
 
-const PlayerProfile: React.FC<User> = ({ _id, comrades, pendingComrade }) => {
+interface Props {
+    _id: string;
+    comrades: string[];
+    pendingComrade: [
+        {
+            userId: string;
+            accepted: boolean;
+        }
+    ];
+}
+
+const PlayerProfile: React.FC<Props> = ({ _id, comrades, pendingComrade }) => {
     const { id } = useParams();
     const nav = useNavigate();
     const [isFriend, setIsFriend] = useState(false);

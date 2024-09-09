@@ -98,7 +98,9 @@ router.post("/login", async (req, res) => {
         );
 
         if (!passwordCompare) {
-            return res.status(401).json({ Error: "Unauthorized" });
+            return res
+                .status(401)
+                .json({ Error: "Wrong username of password!" });
         }
 
         // Set token for user

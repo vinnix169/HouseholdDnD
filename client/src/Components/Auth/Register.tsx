@@ -40,15 +40,15 @@ const Register: React.FC = () => {
     console.log(data);
 
     return (
-        <main className="flex w-full items-start">
+        <main className="flex w-full items-start xl:justify-center xl:items-center">
             <form
-                className="flex flex-col m-10 w-1/3"
+                className="flex flex-col p-10 w-1/2 xl:w-2/3 md:w-full xl:justify-center xl:items-center"
                 onSubmit={handleRegistration}
             >
                 <h1 className="border-l-2 p-2 mb-5 text-4xl font-bold">
                     Start your adventure!
                 </h1>
-                <div className="w-52 border-l-2 p-2">
+                <div className="w-1/2 sm:w-full border-l-2 p-2">
                     <div className="flex flex-col mb-4">
                         <label htmlFor="name" className="mb-1">
                             Name:
@@ -110,7 +110,7 @@ const Register: React.FC = () => {
                 </div>
             </form>
             <div
-                className="w-2/3 h-screen bg-cover bg-center "
+                className="w-2/3 xl:hidden h-screen bg-cover bg-center "
                 style={{
                     backgroundImage: `url("./src/img/login-wallpaper-4.jpg")`,
                 }}
